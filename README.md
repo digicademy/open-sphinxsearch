@@ -10,7 +10,7 @@ OpenSphinxSearch is based on the [Slim PHP Framework](https://www.slimframework.
 the [Sphinx PHP API](https://github.com/romainneutron/Sphinx-Search-API-PHP-Client)
 and [Twig](https://twig.symfony.com/) as template engine.
 
-OpenSphinxSearch has been successfully tested with PHP 5.4.x - 7.x and Sphinxsearch 2.x.
+OpenSphinxSearch has been successfully tested with PHP 5.6.x - 7.x.x and Sphinxsearch 2.2.x.
 It might work on more recent versions of Sphinx as well. 
 
 This is beta software (fully usable) but documentation is still missing. Future releases
