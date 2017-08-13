@@ -6,7 +6,7 @@ fully configurable and the output fully customizable with templates.
 
 ## Basics
 
-OpenSphinxSearch is PHP based on the [Slim Framework](https://www.slimframework.com/) (version 2), 
+OpenSphinxSearch is based on the [Slim PHP Framework](https://www.slimframework.com/) (version 2), 
 the [Sphinx PHP API](https://github.com/romainneutron/Sphinx-Search-API-PHP-Client)
 and [Twig](https://twig.symfony.com/) as template engine.
 
