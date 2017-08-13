@@ -1,0 +1,10 @@
+["{{ q }}"{% if result.total_found > 0 %},[
+{% endif %}
+{% for key, item in result.matches %}
+{% if loop.last %}
+"Sphinx id: {{ key }}"
+{% else %}
+"Sphinx id: {{ key }}",
+{% endif %}
+{% endfor %}
+{% if result.total_found > 0 %}]{% endif %}]

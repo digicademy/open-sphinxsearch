@@ -1,0 +1,118 @@
+{
+	"sphinx": {
+		"settings": {
+			"host": "localhost",
+			"port": 9312,
+			"maxquerytime": "integer",
+			"indexweights": {
+				"index_one": "integer",
+				"index_two": "integer"
+			},
+			"retrycount": "integer",
+			"retrydelay": "integer",
+			"mode": "integer 1 - 7",
+			"sort": "integer 1 - 6",
+			"sortby": "ATTR",
+			"ranker": "integer 0 - 9",
+			"min_id": "integer",
+			"max_id": "integer",
+			"select": "ATTR",
+			"fieldweights": {
+				"FIELD1": "integer",
+				"FIELD2": "integer"
+			},
+			"groupby": "string",
+			"groupfunc": "integer 0 - 6",
+			"groupsort": "string",
+			"groupdistinct": "string",
+			"set_filter": {
+				"ATTR": "integer list"
+			},
+			"set_filter_range": {
+				"ATTR": {
+					"min": "integer",
+					"max": "integer",
+					"exclude": "boolean"
+				}
+			},
+			"set_filter_floatrange": {
+				"ATTR": {
+					"min": "float",
+					"max": "float",
+					"exclude": "boolean"
+				}
+			},
+			"set_geo_anchor": {
+				"attrlat": "ATTR",
+				"attrlong": "ATTR",
+				"lat": "float",
+				"long": "float"
+			}
+		},
+		"indexes": {
+			"MY_FIRST_INDEX": {
+				"alias": "index_real_name",
+				"description": "description for the Open Search description tag",
+				"search": {
+					"wrapQ": "|",
+					"escapeQ": "boolean"
+				},
+				"suggest": {
+					"wrapQ": "|",
+					"escapeQ": "boolean"
+				},
+				"keywords": {
+					"hits": "boolean"
+				},
+				"excerpts": {
+					"limit": "integer",
+					"around": "integer",
+					"limit_passages": "integer",
+					"limit_words": "integer",
+					"start_passage_id": "integer",
+					"exact_phrase": "boolean",
+					"use_boundaries": "boolean",
+					"weight_order": "boolean",
+					"query_mode": "boolean",
+					"force_all_words": "boolean",
+					"load_files": "boolean",
+					"load_files_scattered": "boolean",
+					"allow_empty": "boolean",
+					"emit_zones": "boolean",
+					"html_strip_mode": "none|strip|index|retain",
+					"passage_boundary": "sentence|paragraph|zone"
+				},
+				"allowParameters": "q,offset,limit,...",
+				"allowAttributes": {
+					"set_filter": "ATTR1,ATTR2,...",
+					"set_filter_range": "ATTR1,ATTR2,...",
+					"set_filter_floatrange": "ATTR1,ATTR2,...",
+					"set_geo_anchor": "ATTR1,ATTR2,...",
+					"override": "ATTR1,ATTR2,...",
+					"fieldweights": "ATTR1,ATTR2,..."
+				},
+				"settings": {
+				}
+			},
+			"MY_SECOND_INDEX": {
+				"alias": "second_index_real_name,third_index_real_name",
+				"description": "description for the Open Search description tag",
+				"keywords": {
+				},
+				"excerpts": {
+				},
+				"allowParameters": "q",
+				"allowAttributes": {
+				},
+				"settings": {
+				}
+			}
+		}
+	},
+	"slim": {
+		"templatesPath": "../templates"
+	},
+	"twig": {
+		"nothing": "yet"
+	}
+}

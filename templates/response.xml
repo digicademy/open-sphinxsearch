@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	 xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:sphinx="http://sphinxsearch.com">
+	<channel>
+		<title>Open Sphinxsearch</title>
+		<link>###LINK###</link>
+		<description>###DESCRIPTION###</description>
+		<opensearch:totalResults>{{ result.total_found }}</opensearch:totalResults>
+		<opensearch:startIndex>{{ startIndex }}</opensearch:startIndex>
+		<opensearch:itemsPerPage>{{ itemsPerPage }}</opensearch:itemsPerPage>
+		<atom:link rel="search" type="application/opensearchdescription+xml" href="http://{{ host }}{{ path }}"/>
+		<opensearch:Query role="request" searchTerms="{{ q }}" startPage="{{ startPage }}" count="{{ itemsPerPage }}" />
+		{% for key, item in result.matches %}
+		<item>
+			<title>Sphinx Document: {{ key }}</title>
+			<link>###LINK###</link>
+			<description>###DESCRIPTION###</description>
+			<sphinx:id>{{ key }}</sphinx:id>
+			<sphinx:weight>{{ item.weight }}</sphinx:weight>
+			{% for attrname, value in item.attrs %}
+			{% if value %}
+			<sphinx:{{ attrname }}>{{ value }}</sphinx:{{ attrname }}>
+			{% endif %}
+			{% endfor %}
+		</item>
+		{% endfor %}
+	</channel>
+</rss>

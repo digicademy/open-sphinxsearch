@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+	<ShortName>Open Sphinx Search</ShortName>
+	<Description>Open up your indexes for syndication and aggregation</Description>
+	<Tags>example web</Tags>
+	<Contact>admin@example.com</Contact>
+	<InputEncoding>UTF-8</InputEncoding>
+	<OutputEncoding>UTF-8</OutputEncoding>
+	<Url type="application/opensearchdescription+xml" rel="self" template="http://{{ host }}{{ path }}" />
+	<Url type="application/x-suggestions+json" template="http://{{ host }}{{ path }}suggest?q={searchTerms}"/>
+	<Url type="application/rss+xml" rel="results" template="http://{{ host }}{{ path }}search?q={searchTerms}&amp;offset={startPage?}&amp;limit={count?}"/>
+	<Query role="example" searchTerms="cat" />
+</OpenSearchDescription>

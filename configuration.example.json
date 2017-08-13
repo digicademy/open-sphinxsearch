@@ -1,0 +1,44 @@
+{
+	"sphinx": {
+		"settings": {
+			"host": "localhost",
+			"port": 9312,
+			"mode": 4,
+			"sort": 4,
+			"sortby": "@weight DESC",
+			"ranker": 0
+		},
+		"indexes": {
+			"MY_FIRST_INDEX": {
+				"alias": "index_real_name",
+				"description": "description for the Open Search description tag",
+				"keywords": {
+				},
+				"excerpts": {
+				},
+				"allowParameters": "q,offset,limit",
+				"settings": {
+				}
+			},
+			"MY_SECOND_INDEX": {
+				"alias": "first_index_real_name,second_index_real_name",
+				"description": "description for the Open Search description tag",
+				"keywords": {
+				},
+				"excerpts": {
+				},
+				"allowParameters": "q,offset,limit",
+				"allowAttributes": {
+				},
+				"settings": {
+				}
+			}
+		}
+	},
+	"slim": {
+		"templatesPath": "../templates"
+	},
+	"twig": {
+		"nothing": "yet"
+	}
+}

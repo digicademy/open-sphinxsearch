@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	 xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:sphinx="http://sphinxsearch.com">
+	<channel>
+		<title>Open Sphinx Search</title>
+		<link>http://sphinxsearch.com</link>
+		<description>Extracted keywords from query</description>
+		<opensearch:totalResults>{{ count }}</opensearch:totalResults>
+		{% for keyword in result %}
+		<item>
+			<title>{{ keyword.tokenized }}</title>
+			<sphinx:tokenized>{{ keyword.tokenized }}</sphinx:tokenized>
+			<sphinx:normalized>{{ keyword.normalized }}</sphinx:normalized>
+			{% if keyword.docs is defined %}
+			<sphinx:docs>{{ keyword.docs }}</sphinx:docs>
+			{% endif %}
+			{% if keyword.docs is defined %}
+			<sphinx:hits>{{ keyword.hits }}</sphinx:hits>
+			{% endif %}
+		</item>
+		{% endfor %}
+	</channel>
+</rss>

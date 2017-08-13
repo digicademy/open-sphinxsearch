@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% for index in indexes %}
+		<link rel="search" type="application/opensearchdescription+xml" title="{{ index.description }}" href="{{ index.path }}/">
+		{% endfor %}
+	</head>
+	<body>
+		<h1>Open Sphinx Search</h1>
+	</body>
+</html>

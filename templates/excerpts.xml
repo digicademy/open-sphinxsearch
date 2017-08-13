@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	 xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:sphinx="http://sphinxsearch.com">
+	<channel>
+		<title>Open Sphinx Search</title>
+		<link>http://sphinxsearch.com</link>
+		<description>Highlighted excerpts from query</description>
+		<opensearch:totalResults>{{ count }}</opensearch:totalResults>
+		{% for excerpt in result %}
+		<item>
+			<title>Doc {{ loop.index }}</title>
+			<description>{{ excerpt }}</description>
+		</item>
+		{% endfor %}
+	</channel>
+</rss>

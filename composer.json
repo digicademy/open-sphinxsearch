@@ -1,0 +1,25 @@
+{
+    "name": "digicademy/open-sphinxsearch",
+    "description": "Provides an OpenSearch API to Sphinx Searchserver",
+    "homepage": "https://github.com/digicademy/open-sphinxsearch",
+    "authors": [
+        {
+          "name": "Torsten Schrade",
+          "email": "Torsten.Schrade@adwmainz.de",
+          "role": "Developer",
+          "homepage": "http://www.adwmainz.de"
+        }
+    ],
+    "license": ["MIT"],
+    "keywords": ["Sphinx", "Fulltext Search", "OpenSearch"],
+    "support": {
+        "issues": "https://github.com/digicademy/open-sphinxsearch/issues"
+    },
+    "version": "0.1.0",
+    "require": {
+        "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "twig/twig": "1.*",
+        "neutron/sphinxsearch-api": "2.0.*"
+    }
+}
