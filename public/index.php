@@ -131,20 +131,23 @@ $app->container->singleton('sphinxClient', function () use ($app) {
         $sphinxClient->SetMatchMode((int)$app->request->get('mode'));
     }
 
-    if (property_exists($sphinxSettings, 'sort') && (int)$sphinxSettings->sort > 0 && (int)$sphinxSettings->sort < 6) {
-        $sphinxClient->SetSortMode((int)$sphinxSettings->sort);
-    }
-    if ((int)$app->request->get('sort') > 0 && (int)$app->request->get('sort') < 6 && property_exists($sphinxSettings,
-            'allowParameters') && in_array('sort', $sphinxSettings->allowParameters)) {
-        $sphinxClient->SetSortMode((int)$app->request->get('sort'));
-    }
-
     if (property_exists($sphinxSettings, 'sortby') && $sphinxSettings->sortby) {
-        $sphinxClient->SetSortMode($sphinxClient->_sort, $sphinxSettings->sortby);
+        $sortby = $sphinxSettings->sortby;
+        $sphinxClient->SetSortMode((int)$sphinxClient->_sort, $sortby);
     }
     if ($app->request->get('sortby') && property_exists($sphinxSettings, 'allowParameters') && in_array('sortby',
             $sphinxSettings->allowParameters)) {
-        $sphinxClient->SetSortMode($sphinxClient->_sort, $app->request->get('sortby'));
+        $sortby = $app->request->get('sortby');
+        $sphinxClient->SetSortMode((int)$sphinxClient->_sort, $sortby);
+    }
+    if (!$sortby) $sortby = '@weight DESC'; // needs to be set - otherwise assert fails on PHP 5
+
+    if (property_exists($sphinxSettings, 'sort') && (int)$sphinxSettings->sort > 0 && (int)$sphinxSettings->sort < 6) {
+        $sphinxClient->SetSortMode((int)$sphinxSettings->sort, $sortby);
+    }
+    if ((int)$app->request->get('sort') > 0 && (int)$app->request->get('sort') < 6 && property_exists($sphinxSettings,
+            'allowParameters') && in_array('sort', $sphinxSettings->allowParameters)) {
+        $sphinxClient->SetSortMode((int)$app->request->get('sort'), $sortby);
     }
 
     if (property_exists($sphinxSettings,
@@ -301,7 +304,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
                     $min = null;
                     $max = null;
 
-                    ((int) $settings->exclude === 1) ? $exclude = true : $exclude = false;
+                    ((int)$settings->exclude === 1) ? $exclude = true : $exclude = false;
 
                     switch ($type) {
                         case 'set_filter':
