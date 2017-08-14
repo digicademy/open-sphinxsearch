@@ -110,7 +110,7 @@
 		}
 	},
 	"slim": {
-		"templatesPath": "../templates"
+		"templatesPath": "../views"
 	},
 	"twig": {
 		"nothing": "yet"

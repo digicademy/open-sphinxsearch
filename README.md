@@ -33,9 +33,12 @@ The installation procedure for the OpenSphinxSearch package works as follows:
 3. CD into the project directory and use `composer install` to install the dependencies
 4. Copy *configuration.example.json* to *configuration.json* and modify the file with your own settings
    (use configuration.example.full.json as a reference)
+5. Optionally copy the *view* directory to a *templates* directory (this is ignored from git versioning)
+   and modify the Twig templates to your needs. Don't forget to configure the new templates directory in your
+   configuration.json file.
 5. Point your webserver (vhost) to the *public* directory of your installation and make
-   sure that all requests are routed through the index.php file (an .htaccess file for Apache is included), 
-   for Nginx you need to tweak your vhost configuration
+   sure that all requests are routed through the index.php file (an .htaccess file for Apache is included; 
+   for Nginx you need to tweak your vhost configuration depending on your webserver installation)
 
 Open your browser and navigate to the URL under which you have installed OpenSphinxSearch. The base URL
 provides you with a simple HTML page that references the (dynamically generated) OpenSearch description. The next 
