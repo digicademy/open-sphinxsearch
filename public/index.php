@@ -454,7 +454,7 @@ $app->get('/', function ($indexes = array()) use ($app) {
 });
 
 // routes into defined indexes; each index can have opensearch description, search, suggest, keywords and excerpts endpoints
-$app->group('/:index', function ($index) use ($app) {
+$app->group('/:index', function () use ($app) {
 
     $app->get('/', function ($index) use ($app) {
 
