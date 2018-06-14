@@ -26,7 +26,7 @@
 			"groupsort": "string",
 			"groupdistinct": "string",
 			"set_filter": {
-				"ATTR": "integer list"
+				"ATTR": "(comma separated) integer"
 			},
 			"set_filter_range": {
 				"ATTR": {

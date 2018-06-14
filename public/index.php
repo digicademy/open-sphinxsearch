@@ -304,16 +304,18 @@ $app->container->singleton('sphinxClient', function () use ($app) {
                     $min = null;
                     $max = null;
 
-                    ((int)$settings->exclude === 1) ? $exclude = true : $exclude = false;
+                    if (is_object($settings) && property_exists($settings, 'exclude')) {
+                        if ((int)$settings->exclude === 1) $exclude = true;
+                    };
 
                     switch ($type) {
                         case 'set_filter':
-                            if ($settings->values) {
+                            if (is_object($settings) && property_exists($settings, 'values')) {
                                 $values = array_map('intval', explode(',', $settings->values));
+                            } else {
+                                $values = array_map('intval', explode(',', $settings));
                             }
-                            if (count($values) > 0) {
-                                $sphinxClient->SetFilter($attribute, $values, $exclude);
-                            }
+                            $sphinxClient->SetFilter($attribute, $values, $exclude);
                             break;
                         case 'set_filter_range':
                             $min = (int)$settings->min;
@@ -669,6 +671,7 @@ $app->group('/:index', function () use ($app) {
 // run
 /////////////////////////////////////////////////////////////////////////////
 
-$app->response->headers->set('Content-Type', 'application/xml');
+#$app->response->headers->set('Content-Type', 'application/xml');
+$app->response->headers->set('Content-Type', 'text/xml');
 $app->view()->setTemplatesDirectory($app->settings['configuration']->slim->templatesPath);
 $app->run();
