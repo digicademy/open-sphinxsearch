@@ -467,7 +467,8 @@ $app->group('/:index', function () use ($app) {
         if (is_object($app->config('configuration')->sphinx->indexes->{$index})) {
             $app->response->headers->set('Content-Type', 'application/opensearchdescription+xml');
             $app->render($template, array(
-                'host' => $app->request->getHostWithPort(),
+                'host' => $app->request->getHost(),
+                'port' => $app->request->getPort(),
                 'path' => $app->request->getPath()
             ));
         } else {
@@ -506,7 +507,8 @@ $app->group('/:index', function () use ($app) {
 
             if ($result !== false) {
                 $app->render($template, array(
-                    'host' => $app->request->getHostWithPort(),
+                    'host' => $app->request->getHost(),
+                    'port' => $app->request->getPort(),
                     'path' => substr($app->request->getPath(), 0, -7),
                     'q' => urlencode($q),
                     'startIndex' => ($sphinxClient->_offset * $sphinxClient->_limit) + 1,
