@@ -33,6 +33,12 @@ $app = new \Slim\Slim(array(
     'configuration' => $configuration
 ));
 
+// enable template based debugging 
+if($configuration->twig->debug === true) {
+    $app->view->parserExtensions = array(new \Twig_Extension_Debug());
+    $app->view->parserOptions = ['debug' => true];
+}
+
 // halt if no valid configuration could be loaded
 if (is_object($configuration) === false) {
     // working around slim limitation @see: http://bit.ly/1pisEJZ
@@ -88,6 +94,12 @@ $app->container->singleton('sphinxClient', function () use ($app) {
         foreach ($configuration->sphinx->indexes->{$index}->allowAttributes as $key => $values) {
             $configuration->sphinx->settings->allowAttributes->{$key} = explode(',', $values);
         }
+    }
+
+    if (is_object($configuration->sphinx->indexes->{$index}) && property_exists($configuration->sphinx->indexes->{$index},
+            'languages') && $configuration->sphinx->indexes->{$index}->languages) {
+        $configuration->sphinx->settings->languages = explode(',',
+            $configuration->sphinx->indexes->{$index}->languages);
     }
 
     $app->config('configuration', $configuration);
@@ -294,6 +306,13 @@ $app->container->singleton('sphinxClient', function () use ($app) {
 
     // $set_filter_string[ATTR]=VALUE // only newest Sphinx API / not yet supported
 
+    // language settings
+    if ((string)$app->request->get('lang') && property_exists($sphinxSettings,
+            'allowParameters') && in_array('lang', $sphinxSettings->allowParameters)
+            && in_array($app->request->get('lang'), $sphinxSettings->languages)) {
+        $langId = array_search($app->request->get('lang'), $sphinxSettings->languages);
+        $filters['set_filter']->sys_language_uid = $langId;
+    }
     // set all filters
     if (count($filters) > 0) {
         foreach ($filters as $type => $filter) {
