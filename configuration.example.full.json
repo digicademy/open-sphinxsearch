@@ -83,6 +83,7 @@
 					"passage_boundary": "sentence|paragraph|zone"
 				},
 				"allowParameters": "q,offset,limit,...",
+				"languages": "en-en,de-de,...",
 				"allowAttributes": {
 					"set_filter": "ATTR1,ATTR2,...",
 					"set_filter_range": "ATTR1,ATTR2,...",
@@ -113,6 +114,6 @@
 		"templatesPath": "../views"
 	},
 	"twig": {
-		"nothing": "yet"
+		"debug": true
 	}
 }

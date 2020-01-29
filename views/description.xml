@@ -4,6 +4,8 @@
 	<Description>Open up your indexes for syndication and aggregation</Description>
 	<Tags>example web</Tags>
 	<Contact>admin@example.com</Contact>
+	<Language>en-en</Language>
+	<Language>de-de</Language>
 	<InputEncoding>UTF-8</InputEncoding>
 	<OutputEncoding>UTF-8</OutputEncoding>
 	<Url type="application/opensearchdescription+xml" rel="self" template="http://{{ host }}{{ path }}" />
