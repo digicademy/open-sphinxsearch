@@ -194,7 +194,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     if (property_exists($sphinxSettings, 'fieldweights') && count($sphinxSettings->fieldweights) > 0) {
         $sphinxClient->SetFieldWeights(array_map('intval', get_object_vars($sphinxSettings->fieldweights)));
     }
-    if (count($app->request->get('fieldweights')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('fieldweights') && count($app->request->get('fieldweights')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('fieldweights', $sphinxSettings->allowParameters)) {
         $fieldweightsGET = $app->request->get('fieldweights');
         foreach ($fieldweightsGET as $fieldname => $value) {
@@ -202,7 +202,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
                 unset($fieldweightsGET[$fieldname]);
             }
         }
-        (count($sphinxSettings->fieldweights) > 0) ?
+        (property_exists($sphinxSettings, 'fieldweights') && (count($sphinxSettings->fieldweights) > 0)) ?
             $fieldweights = array_merge(array_map('intval', get_object_vars($sphinxSettings->fieldweights)),
                 array_map('intval', $fieldweightsGET)) :
             $fieldweights = array_map('intval', $fieldweightsGET);
@@ -251,7 +251,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     if (property_exists($sphinxSettings, 'set_filter') && count($sphinxSettings->set_filter) > 0) {
         $filters['set_filter'] = $sphinxSettings->set_filter;
     }
-    if (count($app->request->get('set_filter')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('set_filter') && count($app->request->get('set_filter')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('set_filter', $sphinxSettings->allowParameters)) {
         $setFilterGET = json_decode(json_encode($app->request->get('set_filter')));
         foreach ($setFilterGET as $attribute => $values) {
@@ -265,7 +265,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     if (property_exists($sphinxSettings, 'set_filter_range') && count($sphinxSettings->set_filter_range) > 0) {
         $filters['set_filter_range'] = $sphinxSettings->set_filter_range;
     }
-    if (count($app->request->get('set_filter_range')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('set_filter_range') && count($app->request->get('set_filter_range')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('set_filter_range', $sphinxSettings->allowParameters)) {
         $filterRangeGET = json_decode(json_encode($app->request->get('set_filter_range')));
         foreach ($filterRangeGET as $attribute => $range) {
@@ -279,7 +279,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     if (property_exists($sphinxSettings,'set_filter_floatrange') && count($sphinxSettings->set_filter_floatrange) > 0) {
         $filters['set_filter_floatrange'] = $sphinxSettings->set_filter_floatrange;
     }
-    if (count($app->request->get('set_filter_floatrange')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('set_filter_floatrange') && count($app->request->get('set_filter_floatrange')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('set_filter_floatrange', $sphinxSettings->allowParameters)) {
         $filterFloatRangeGET = json_decode(json_encode($app->request->get('set_filter_floatrange')));
         foreach ($filterFloatRangeGET as $attribute => $range) {
@@ -293,7 +293,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     if (property_exists($sphinxSettings, 'set_geo_anchor') && count($sphinxSettings->set_geo_anchor) > 0) {
         $filters['set_geo_anchor'] = $sphinxSettings->set_geo_anchor;
     }
-    if (count($app->request->get('set_geo_anchor')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('set_geo_anchor') && count($app->request->get('set_geo_anchor')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('set_geo_anchor', $sphinxSettings->allowParameters)) {
         $geoAnchorGET = json_decode(json_encode($app->request->get('set_geo_anchor')));
         if (in_array($geoAnchorGET->attrlat,
@@ -314,7 +314,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
         $filters['set_filter']->sys_language_uid = $langId;
     }
     // set all filters
-    if (count($filters) > 0) {
+    if ($filters && count($filters) > 0) {
         foreach ($filters as $type => $filter) {
             if (is_object($filter)) {
                 foreach (get_object_vars($filter) as $attribute => $settings) {
@@ -386,7 +386,7 @@ $app->container->singleton('sphinxClient', function () use ($app) {
     }
 
     // &override[ATTR][type]=3&override[ATTR][docs][123]=55
-    if (count($app->request->get('override')) > 0 && property_exists($sphinxSettings,
+    if ($app->request->get('override') && count($app->request->get('override')) > 0 && property_exists($sphinxSettings,
             'allowParameters') && in_array('override', $sphinxSettings->allowParameters)) {
         foreach ($app->request->get('override') as $attribute => $values) {
             if ((int)$values['type'] > 0 && $values['docs'] && property_exists($sphinxSettings,
@@ -407,7 +407,7 @@ function setOpts($optsSettings, $optsPOST, $allowParameters)
 
     (is_object($optsSettings)) ? $optsSettings = get_object_vars($optsSettings) : $optsSettings = array();
 
-    if (count($optsPOST) > 0) {
+    if ($optsPOST && count($optsPOST) > 0) {
         foreach ($optsPOST as $option => $value) {
             if (in_array($option, $allowParameters) === false) {
                 unset($optsPOST[$option]);
@@ -419,7 +419,7 @@ function setOpts($optsSettings, $optsPOST, $allowParameters)
 
     $mergedOpts = array_merge($optsSettings, $optsPOST);
 
-    if (count($mergedOpts) > 0) {
+    if ($mergedOpts && count($mergedOpts) > 0) {
         foreach ($mergedOpts as $option => $value) {
             switch ($option) {
                 case 'limit':
