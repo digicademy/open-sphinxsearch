@@ -33,7 +33,7 @@ $app = new \Slim\Slim(array(
     'configuration' => $configuration
 ));
 
-// enable template based debugging 
+// enable template based debugging
 if($configuration->twig->debug === true) {
     $app->view->parserExtensions = array(new \Twig_Extension_Debug());
     $app->view->parserOptions = ['debug' => true];
