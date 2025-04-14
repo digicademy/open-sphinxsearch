@@ -2,7 +2,11 @@
 <html>
 	<head>
 		{% for index in indexes %}
-		<link rel="search" type="application/opensearchdescription+xml" title="{{ index.description }}" href="{{ index.path }}/">
+		<link
+            rel="search"
+            type="application/opensearchdescription+xml"
+            title="{{ index.description }}"
+            href="{{ index.path }}" />
 		{% endfor %}
 	</head>
 	<body>
